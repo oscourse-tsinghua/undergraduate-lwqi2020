@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+    <script src="./geohash.js"></script>
+    <script src="./geolib.js"></script>
+    <script src="./common.js"></script>
+
+</head>
+<body>
+    <div class="container">
+
+    <h2 id="r1"></h2>
+    <h2 id="r2"></h2>
+    <h2 id="r3"></h2>
+    <h2 id="r4"></h2>
+    <h2 id="r5"></h2>
+    <h2 id="r6"></h2>
+    <h2 id="r7"></h2>
+    <h2 id="r8"></h2>
+    <h2 id="r9"></h2>
+    <h2 id="r10"></h2>
+    <h2 id="r11"></h2>
+    <h2 id="r12"></h2>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <script>
+        var latdelta = [15, 25, 35, 45, 55];
+        var lonat = 120;
+        var delta = [1, 2, 3, 5, 10, 20, 30, 40, 50, 100];
+        var deltaLon = [38, 36, 34, 29, 24, 19, 11, 4];
+
+        for (var i = 0; i < 66; i++) {
+            //console.log("==========");
+            //console.log(i);
+        for (var j = 0; j < 1; j++) {
+            //console.log(latdelta[i]);
+            //console.log(delta[j]);
+            geohash1 = encode_geohash(lonat, i);
+            geohash2 = CalculateShift(geohash1, 0, delta[j]);
+            anstrue = getDistanceBtwP(decode_geohash(geohash1)[2], 
+                                  decode_geohash(geohash1)[0],
+                                  decode_geohash(geohash2)[2],
+                                  decode_geohash(geohash2)[0]);
+            ansgeohash = getDistanceByGeohash(geohash1, geohash2);
+            //console.log(anstrue);
+            //console.log(ansgeohash);
+            console.log(Math.abs(anstrue - ansgeohash) / ansgeohash * 100);
+            //console.log(Math.abs(anstrue - ansgeohash));
+
+        }
+        }
+        
+    </script>
+
+</body>
+</html>
